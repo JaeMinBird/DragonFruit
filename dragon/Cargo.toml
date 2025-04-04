@@ -1,19 +1,27 @@
 [package]
 name = "dragon"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
 argon2 = "0.5.3"
-axum = { version = "0.8.3", features = ["tokio"] }
+axum = { version = "0.6.20", features = ["macros"] }
+base64 = "0.22.1"
 dotenv = "0.15.0"
 jsonwebtoken = "9.3.1"
+rand = "0.8.5"
 serde = "1.0.219"
 serde_derive = "1.0.219"
 serde_json = "1.0.140"
-sqlx = { version = "0.8.3", features = ["postgres", "runtime-tokio-rustls"] }
-time = "0.3.41"
+sqlx = { version = "0.7.3", features = ["postgres", "runtime-tokio-rustls", "uuid", "time"] }
+time = { version = "0.3.41", features = ["serde"] }
 tokio = { version = "1.44.1", features = ["full"] }
 totp-lite = "2.0.1"
-tower-http = "0.6.2"
-uuid = "1.16.0"
+tower-http = { version = "0.4.4", features = ["cors", "trace"] }
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+uuid = { version = "1.16.0", features = ["serde", "v4"] }
+async-trait = "0.1.77"
+data-encoding = "2.8.0"
+hmac = "0.12.1"
+sha1 = "0.10.6"
