@@ -146,7 +146,7 @@ DragonFruit API
 ├─────────────┤       ├─────────────┤       ├─────────────┤
 │ id          │       │ id          │       │ id          │
 │ email       │       │ user_id     │───┐   │ user_id     │───┐
-│ password_hash│       │ name        │   │   │ category_id │╌╌╌┘
+│password_hash│       │ name        │   │   │ category_id │╌╌╌┘
 │ totp_secret │       │ parent_id   │╌╌╌┘   │ name        │
 │ totp_enabled│       │ created_at  │       │ website     │
 │ created_at  │       │ updated_at  │       │ username    │
