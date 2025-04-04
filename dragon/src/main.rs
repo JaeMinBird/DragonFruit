@@ -1,35 +1,35 @@
+#[allow(dead_code)]
 mod auth;
+#[allow(dead_code)]
 mod crypto;
+#[allow(dead_code)]
 mod db;
+#[allow(dead_code)]
 mod errors;
+#[allow(dead_code)]
 mod handlers;
+#[allow(dead_code)]
 mod middleware;
+#[allow(dead_code)]
 mod models;
+#[allow(dead_code)]
 mod routes;
 
-use dotenv::dotenv;
-use tower_http::trace::TraceLayer;
-use crate::middleware::cors_layer;
 use std::net::SocketAddr;
 use axum::{
-    routing::{get, post, put, delete},
+    routing::{get, post, put},
     Router,
-    middleware,
 };
-use tower::ServiceBuilder;
+use axum::middleware::from_fn_with_state;
 use tower_http::cors::{CorsLayer, Any};
 
-use dragonfruit::{
+use crate::{
     db::create_pool,
     handlers::{
         // Auth handlers
         register, login, generate_totp_for_user, enable_totp, get_profile, update_profile,
-        
-        // Category handlers (need to implement these)
-        
-        // Credential handlers (need to implement these)
     },
-    middleware::auth::{require_auth, AuthUser},
+    middleware::auth::require_auth,
 };
 
 #[tokio::main]
@@ -41,7 +41,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing_subscriber::fmt::init();
     
     // Create database connection pool
-    let pool = create_pool().await?;
+    let pool = create_pool().await;
     
     // Set up CORS middleware
     let cors = CorsLayer::new()
@@ -62,7 +62,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .route("/auth/totp/generate", post(generate_totp_for_user))
         .route("/auth/totp/enable", post(enable_totp))
         .with_state(pool.clone())
-        .route_layer(middleware::from_fn_with_state(pool.clone(), require_auth));
+        .route_layer(from_fn_with_state(pool.clone(), require_auth));
         
     // Build the application with middleware
     let app = Router::new()

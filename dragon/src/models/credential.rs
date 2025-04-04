@@ -3,7 +3,54 @@ use sqlx::FromRow;
 use uuid::Uuid;
 use time::OffsetDateTime;
 
-use crate::utils::time::datetime_serializer;
+// Simplified time serializer without external dependency
+mod datetime_serializer {
+    use serde::{Deserialize, Deserializer, Serializer, Serialize};
+    use time::OffsetDateTime;
+    
+    pub fn serialize<S>(date: &OffsetDateTime, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        date.to_string().serialize(serializer)
+    }
+    
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<OffsetDateTime, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+        OffsetDateTime::parse(&s, &time::format_description::well_known::Rfc3339)
+            .map_err(serde::de::Error::custom)
+    }
+    
+    pub mod option {
+        use super::*;
+        
+        pub fn serialize<S>(date: &Option<OffsetDateTime>, serializer: S) -> Result<S::Ok, S::Error>
+        where
+            S: Serializer,
+        {
+            match date {
+                Some(date) => date.to_string().serialize(serializer),
+                None => serializer.serialize_none(),
+            }
+        }
+        
+        pub fn deserialize<'de, D>(deserializer: D) -> Result<Option<OffsetDateTime>, D::Error>
+        where
+            D: Deserializer<'de>,
+        {
+            let s: Option<String> = Option::deserialize(deserializer)?;
+            match s {
+                Some(s) => OffsetDateTime::parse(&s, &time::format_description::well_known::Rfc3339)
+                    .map(Some)
+                    .map_err(serde::de::Error::custom),
+                None => Ok(None),
+            }
+        }
+    }
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
 pub struct Credential {
