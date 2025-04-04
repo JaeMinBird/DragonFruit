@@ -4,6 +4,87 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<style>
+			:root {
+				--primary-color: #2c3e50;
+				--accent-color: #e74c3c;
+				--text-color: #333;
+				--light-text: #ecf0f1;
+				--border-color: #ddd;
+				--bg-color: #f9f9f9;
+				--input-bg: #fff;
+				--card-bg: #fff;
+				--error-color: #e74c3c;
+				--success-color: #2ecc71;
+			}
+			
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+					Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				line-height: 1.6;
+				color: var(--text-color);
+				background-color: var(--bg-color);
+			}
+			
+			h1, h2, h3, h4, h5, h6 {
+				margin-bottom: 1rem;
+				line-height: 1.2;
+			}
+			
+			a {
+				color: var(--primary-color);
+				text-decoration: none;
+			}
+			
+			button, .btn {
+				cursor: pointer;
+				padding: 0.5rem 1rem;
+				border-radius: 4px;
+				background-color: var(--primary-color);
+				color: white;
+				border: none;
+				font-size: 1rem;
+				transition: background-color 0.2s;
+			}
+			
+			button:hover, .btn:hover {
+				background-color: #34495e;
+			}
+			
+			input, textarea, select {
+				width: 100%;
+				padding: 0.5rem;
+				margin-bottom: 1rem;
+				border: 1px solid var(--border-color);
+				border-radius: 4px;
+				font-size: 1rem;
+				background-color: var(--input-bg);
+			}
+			
+			.card {
+				background-color: var(--card-bg);
+				border-radius: 8px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+				padding: 1.5rem;
+				margin-bottom: 1.5rem;
+			}
+			
+			.error {
+				color: var(--error-color);
+				margin-bottom: 1rem;
+			}
+			
+			.success {
+				color: var(--success-color);
+				margin-bottom: 1rem;
+			}
+		</style>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

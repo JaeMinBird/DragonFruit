@@ -201,4 +201,3 @@ To run the development server with hot reloading:
 cargo install cargo-watch
 cargo watch -x run
 ```
-```
