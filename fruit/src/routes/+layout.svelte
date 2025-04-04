@@ -54,7 +54,9 @@
   <header>
     <nav>
       <div class="brand">
-        <a href="/">🐉 DragonFruit</a>
+        <a href="/">
+          <span class="doto-font">dragonfruit</span>
+        </a>
       </div>
       
       {#if $auth.token}
@@ -66,12 +68,12 @@
         
         <div class="auth-links">
           <span>{$auth.user?.email}</span>
-          <button on:click={logout}>Logout</button>
+          <button on:click={logout}>logout</button>
         </div>
       {:else}
         <div class="auth-links">
-          <a href="/login" class:active={$page.url.pathname === '/login'}>Login</a>
-          <a href="/register" class:active={$page.url.pathname === '/register'}>Register</a>
+          <a href="/login" class:active={$page.url.pathname === '/login'}>login</a>
+          <a href="/register" class:active={$page.url.pathname === '/register'}>register</a>
         </div>
       {/if}
     </nav>
@@ -82,7 +84,7 @@
   </main>
   
   <footer>
-    <p>&copy; {new Date().getFullYear()} DragonFruit - Secure Password Manager</p>
+    <p>Copyright {new Date().getFullYear()} DragonFruit</p>
   </footer>
 </div>
 
@@ -94,7 +96,13 @@
   }
   
   header {
-    background-color: #2c3e50;
+    background-color: #e74c3c;
+    color: white;
+    padding: 0 1rem;
+  }
+
+  footer {
+    background-color: #e74c3c;
     color: white;
     padding: 0 1rem;
   }
@@ -113,6 +121,19 @@
     font-weight: bold;
     color: white;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .nav-logo {
+    height: 30px;
+    width: auto;
+  }
+  
+  .doto-font {
+    font-family: 'Doto', sans-serif;
+    font-weight: 600;
   }
   
   .nav-links {
