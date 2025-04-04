@@ -1,0 +1,48 @@
+# Backend (Rust)
+/dragon/target
+/dragon/Cargo.lock
+
+# Frontend (Svelte/Node.js)
+/fruit/node_modules
+/fruit/.output
+/fruit/.vercel
+/fruit/.netlify
+/fruit/.wrangler
+/fruit/.svelte-kit
+/fruit/build
+
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env.test
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+*.swp
+*.swo
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs
+*.log
+
+# Misc
+.cache
+dist
+coverage
+.nyc_output
